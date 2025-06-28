@@ -1,26 +1,33 @@
 // src/components/Contact.jsx
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSending, setIsSending] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
+    const form = e.target;
 
-    // Simulate sending message
-    setTimeout(() => {
-      alert("Message sent! Thank you.");
-      setFormData({ name: "", email: "", message: "" });
-      setIsSending(false);
-    }, 1500);
+    toast.promise(
+      emailjs.sendForm(
+        import.meta.env.VITE_serviceID,
+        import.meta.env.VITE_contactUsTemplateID,
+        form,
+        import.meta.env.VITE_publicKey
+      ),
+      {
+        loading: "Message sending...",
+        success: "Message sent successfully!",
+        error: "Failed to send message.",
+      }
+    );
+    setIsSending(false);
+    form.reset();
   };
 
   return (
@@ -48,7 +55,14 @@ const Contact = () => {
             <MdLocationOn size={28} className="text-indigo-400" />
             <div>
               <h3 className="text-lg font-semibold">Location</h3>
-              <p className="text-gray-300">Jashore, Khulna, Bangladesh</p>
+              <a
+                href="https://www.google.com/maps/@23.1651573,89.1935026,13z?authuser=0&entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="hover:text-primary hover:underline text-gray-300"
+              >
+                Jashore, Khulna, Bangladesh
+              </a>
             </div>
           </div>
 
@@ -56,7 +70,12 @@ const Contact = () => {
             <MdPhone size={28} className="text-indigo-400" />
             <div>
               <h3 className="text-lg font-semibold">Phone</h3>
-              <p className="text-gray-300">+88 01701084479</p>
+              <a
+                href="tel:+8801701084479"
+                className="hover:text-primary hover:underline text-gray-300"
+              >
+                🇧🇩 +88 01701084479
+              </a>
             </div>
           </div>
 
@@ -64,7 +83,12 @@ const Contact = () => {
             <MdEmail size={28} className="text-indigo-400" />
             <div>
               <h3 className="text-lg font-semibold">Email</h3>
-              <p className="text-gray-300">shanto22e@gmail.com</p>
+              <a
+                href="mailto:hasibul.hossain.dev@gmail.com"
+                className="hover:text-primary hover:underline text-gray-300"
+              >
+                hasibul.hossain.dev@gmail.com
+              </a>
             </div>
           </div>
         </motion.div>
@@ -82,8 +106,6 @@ const Contact = () => {
             type="text"
             name="name"
             placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
             required
             className="px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-white"
           />
@@ -92,8 +114,6 @@ const Contact = () => {
             type="email"
             name="email"
             placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
             required
             className="px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-white"
           />
@@ -101,9 +121,8 @@ const Contact = () => {
           <textarea
             name="message"
             rows="5"
+            minLength={25}
             placeholder="Your Message"
-            value={formData.message}
-            onChange={handleChange}
             required
             className="px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-white resize-none"
           />

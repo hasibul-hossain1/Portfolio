@@ -2,10 +2,9 @@
 import { FaFacebookF, FaLinkedinIn, FaWhatsapp, FaGithub } from "react-icons/fa";
 
 const socials = [
-  { name: "Facebook", icon: <FaFacebookF size={20} />, href: "#" },
-  { name: "LinkedIn", icon: <FaLinkedinIn size={20} />, href: "#" },
-  { name: "WhatsApp", icon: <FaWhatsapp size={20} />, href: "#" },
-  { name: "GitHub", icon: <FaGithub size={20} />, href: "#" },
+  { name: "LinkedIn", icon: <FaLinkedinIn size={20} />, href:"https://www.linkedin.com/in/hasibul-hossain1" },
+  { name: "WhatsApp", icon: <FaWhatsapp size={20} />, href: "https://wa.me/+8801701084479" },
+  { name: "GitHub", icon: <FaGithub size={20} />, href: "https://github.com/hasibul-hossain1" },
 ];
 
 const Footer = () => {
