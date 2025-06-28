@@ -79,7 +79,7 @@ const Projects = () => {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <div key={project.title} className="tooltip" data-tip="click on image to zoom">
+            <div key={project.title} className="tooltip tooltip-secondary" data-tip="click on image to zoom">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
