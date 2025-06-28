@@ -20,9 +20,9 @@ const skills = [
   { name: "MongoDB", icon: <SiMongodb size={32} className="text-green-500" /> },
   { name: "Express.js", icon: <SiExpress size={32} className="text-white" /> },
   { name: "React.js", icon: <SiReact size={32} className="text-cyan-400" /> },
-  { name: "Next.js", icon: <SiNextdotjs size={32} className="text-white" /> },
+  // { name: "Next.js", icon: <SiNextdotjs size={32} className="text-white" /> },
   { name: "Redux RTK", icon: <SiRedux size={32} className="text-purple-400" /> },
-  { name: "TanStack Query", icon: <SiReactquery size={32} className="text-pink-400" /> },
+  // { name: "TanStack Query", icon: <SiReactquery size={32} className="text-pink-400" /> },
   { name: "Node.js", icon: <SiNodedotjs size={32} className="text-green-600" /> },
   { name: "JavaScript", icon: <SiJavascript size={32} className="text-yellow-400" /> },
   { name: "Firebase", icon: <SiFirebase size={32} className="text-yellow-500" /> },
@@ -64,7 +64,7 @@ const Skills = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-extrabold mb-12 bg-gradient-to-r from-yellow-400 via-green-400 to-teal-400 bg-clip-text text-transparent"
+          className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
         >
           My Skills
         </motion.h2>

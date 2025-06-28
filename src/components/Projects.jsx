@@ -5,27 +5,27 @@ import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 const projects = [
   {
     title: "Project One",
-    image: "/assets/project1.jpg",
+    image: "./assets/hobbyhub.png",
     description:
       "A responsive full-stack web application built with the MERN stack that allows users to create and join hobby groups.",
-    live: "https://your-live-demo-link.com",
+    live: "https://hobbyhub0.netlify.app",
     source: "https://github.com/your-repo/project-one",
   },
   {
     title: "Project Two",
-    image: "/assets/project2.jpg",
+    image: "/assets/biteflow.png",
     description:
       "A portfolio website showcasing my skills, experience, and projects with smooth animations and theme customizations.",
-    live: "https://your-live-demo-link.com",
+    live: "https://flow-bite.netlify.app",
     source: "https://github.com/your-repo/project-two",
   },
   {
     title: "Project Three",
-    image: "/assets/project3.jpg",
+    image: "/assets/gethalaljobs.png",
     description:
       "An eCommerce platform with user authentication, product management, and real-time cart updates.",
-    live: "https://your-live-demo-link.com",
-    source: "https://github.com/your-repo/project-three",
+    live: "https://gethalaljobs.netlify.app",
+    source: ["https://github.com/hasibul-hossain1/Halal-Jobs"],
   },
 ];
 
@@ -58,14 +58,16 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-top object-cover"
                 />
               </div>
 
               {/* Project Content */}
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-300 text-sm mb-6">{project.description}</p>
+                <p className="text-gray-300 text-sm mb-6">
+                  {project.description}
+                </p>
 
                 {/* Action Buttons */}
                 <div className="flex justify-center gap-4 mt-auto">
@@ -77,14 +79,27 @@ const Projects = () => {
                   >
                     <FaExternalLinkAlt /> Live Demo
                   </a>
-                  <a
-                    href={project.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-900 transition text-sm"
-                  >
-                    <FaGithub /> View Source
-                  </a>
+                  <div className="dropdown dropdown-top">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      // rel="noopener noreferrer"
+                      className="flex cursor-pointer items-center gap-2 px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-900 transition text-sm"
+                    >
+                      <FaGithub /> View Source
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                    >
+                      <li>
+                        <a>Item 1</a>
+                      </li>
+                      <li>
+                        <a>Item 2</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </motion.div>
