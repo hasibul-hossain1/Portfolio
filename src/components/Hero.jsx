@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center text-white px-6 bg-transparent relative z-10"
+      className="min-h-screen flex flex-col lg:flex-row items-center justify-center text-white px-6 bg-transparent relative z-10"
     >
       {/* Left: Profile Photo */}
       <motion.div
@@ -14,7 +14,7 @@ const Hero = () => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="mb-10 md:mb-0 md:mr-16"
+        className="mb-10 md:mb-8 md:mr-16"
       >
         <img
           src="/assets/my_photo.png"

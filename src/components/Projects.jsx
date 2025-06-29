@@ -27,7 +27,7 @@ const projects = [
     title: "Bite Flow",
     image: "/assets/biteflow.png",
     description:
-      "A portfolio website showcasing my skills, experience, and projects with smooth animations and theme customizations.",
+      "Bite Flow streamlines restaurant operations by allowing users to manage menus, reservations, staff, and customer interactions.",
     live: "https://flow-bite.netlify.app",
     source: [
       {
@@ -44,7 +44,7 @@ const projects = [
     title: "Get Halal Jobs",
     image: "/assets/gethalaljobs.png",
     description:
-      "An eCommerce platform with user authentication, product management, and real-time cart updates.",
+      "A job listing and recruitment platform built with modern web technologies, focusing on ethical and halal employment opportunities.",
     live: "https://gethalaljobs.netlify.app",
     source: [
       {
