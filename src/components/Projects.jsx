@@ -2,9 +2,19 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaReact, FaNodeJs } from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiFirebase,
+  SiMongodb,
+  SiExpress,
+  SiReactrouter,
+  SiJsonwebtokens
+} from "react-icons/si";
 import { useState } from "react";
+import { TbBrandFramerMotion } from "react-icons/tb";
 
+// Project data with icons
 const projects = [
   {
     title: "Hobby Hub",
@@ -12,6 +22,14 @@ const projects = [
     description:
       "A responsive full-stack web application built with the MERN stack that allows users to create and join hobby groups.",
     live: "https://hobbyhub0.netlify.app",
+    tech: [
+      { name: "React", icon: <FaReact className="text-cyan-400" /> },
+      { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
+      { name: "Firebase", icon: <SiFirebase className="text-yellow-400" /> },
+      { name: "MongoDB", icon: <SiMongodb className="text-green-500" /> },
+      { name: "Express", icon: <SiExpress className="text-gray-300" /> },
+      {name:"Nodejs",icon:<FaNodeJs className="text-green-400"/>}
+    ],
     source: [
       {
         name: "client",
@@ -29,6 +47,17 @@ const projects = [
     description:
       "Bite Flow streamlines restaurant operations by allowing users to manage menus, reservations, staff, and customer interactions.",
     live: "https://flow-bite.netlify.app",
+    tech: [
+      { name: "React", icon: <FaReact className="text-cyan-400" /> },
+      { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
+      {
+        name: "Firebase",
+        icon: <SiFirebase className="text-yellow-400" />,
+      },
+      { name: "MongoDB", icon: <SiMongodb className="text-green-500" /> },
+      { name: "Express", icon: <SiExpress className="text-gray-300" /> },
+      {name:"JWT", icon:<SiJsonwebtokens  className="text-indigo-400 bg-indigo-500/10 border border-indigo-500/20"/>}
+    ],
     source: [
       {
         name: "client",
@@ -46,6 +75,21 @@ const projects = [
     description:
       "A job listing and recruitment platform built with modern web technologies, focusing on ethical and halal employment opportunities.",
     live: "https://gethalaljobs.netlify.app",
+    tech: [
+      { name: "React", icon: <FaReact className="text-cyan-400" /> },
+      { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
+      { name: "Firebase", icon: <SiFirebase className="text-yellow-400" /> },
+      {
+        name: "Motion",
+        icon: (
+          <TbBrandFramerMotion className="bg-yellow-300 text-black rounded-xs" />
+        ),
+      },
+      {
+        name: "React Router",
+        icon: <SiReactrouter className="text-pink-400" />,
+      },
+    ],
     source: [
       {
         name: "client",
@@ -79,7 +123,11 @@ const Projects = () => {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <div key={project.title} className="tooltip tooltip-secondary" data-tip="click on image to zoom">
+            <div
+              key={project.title}
+              className="tooltip tooltip-secondary"
+              data-tip="Click image to zoom"
+            >
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +136,6 @@ const Projects = () => {
                 className="bg-white/5 border border-white/10 rounded-2xl shadow-lg overflow-hidden backdrop-blur-md flex flex-col"
               >
                 {/* Project Image */}
-
                 <div
                   className="h-48 bg-gray-900 cursor-zoom-in group relative"
                   onClick={() => openLightbox(index)}
@@ -105,9 +152,22 @@ const Projects = () => {
                   <h3 className="text-xl font-semibold mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-sm mb-6">
+                  <p className="text-gray-300 text-sm mb-4">
                     {project.description}
                   </p>
+
+                  {/* Tech Badges */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="flex items-center gap-1 px-2 py-1 text-xs bg-white/10 text-white rounded-full border border-white/20 backdrop-blur-sm"
+                      >
+                        {tech.icon}
+                        {tech.name}
+                      </span>
+                    ))}
+                  </div>
 
                   {/* Action Buttons */}
                   <div className="flex justify-center gap-4 mt-auto">
@@ -134,7 +194,7 @@ const Projects = () => {
                         {project.source.map((item, index) => (
                           <li key={index}>
                             <a
-                              className=" hover:bg-gray-900 transition text-sm"
+                              className="hover:bg-gray-900 transition text-sm"
                               rel="noopener noreferrer"
                               href={item.href}
                               target="_blank"
@@ -161,7 +221,7 @@ const Projects = () => {
         plugins={[Zoom]}
         slides={projects.map((p) => ({
           src: p.image,
-          width: 1600, // change to real image size if known
+          width: 1600,
           height: 900,
         }))}
         zoom={{
