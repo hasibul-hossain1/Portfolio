@@ -8,7 +8,7 @@ const Header = () => {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed w-full bg-black text-white shadow-lg z-50"
+      className="fixed w-full bg-black text-white shadow-lg z-40"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Left: Name */}

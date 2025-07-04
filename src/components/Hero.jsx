@@ -14,7 +14,7 @@ const Hero = () => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="mb-10 md:mb-8 md:mr-16"
+        className="mb-10 md:mb-8 md:mr-16 mt-24 lg:mt-0"
       >
         <img
           src="/assets/my_photo.png"
@@ -29,7 +29,7 @@ const Hero = () => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center md:text-left max-w-xl"
+        className="text-center lg:text-left max-w-xl"
       >
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Hi, I'm Hasibul Hossain</h1>
         <h2 className="text-xl sm:text-2xl font-medium mb-6 text-indigo-400">
