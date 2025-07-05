@@ -46,7 +46,7 @@ const projects = [
     image: "/assets/biteflow.png",
     description:
       "Bite Flow streamlines restaurant operations by allowing users to manage menus, reservations, staff, and customer interactions.",
-    live: "https://flow-bite.netlify.app",
+    live: "https://biteflow.netlify.app/",
     tech: [
       { name: "React", icon: <FaReact className="text-cyan-400" /> },
       { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
