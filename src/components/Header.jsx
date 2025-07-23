@@ -31,7 +31,7 @@ const Header = () => {
         {/* Right: Resume Button (Hidden on small screens) */}
         <div className="hidden md:block">
           <a
-            href="/assets/My_Resume.pdf"
+            href="/assets/Hasibul Hossain's Resume.pdf.pdf"
             download
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm transition"
           >
