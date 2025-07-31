@@ -59,7 +59,7 @@ const Hero = () => {
         </p>
         <div className="md:hidden inline-block mt-6">
           <a
-            href="/assets/Hasibul Hossain's Resume.pdf.pdf"
+            href="/assets/Hasibul Hossain's Resume.pdf"
             download
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm transition"
           >
