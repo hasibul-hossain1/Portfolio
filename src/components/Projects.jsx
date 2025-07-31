@@ -2,20 +2,52 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub, FaReact, FaNodeJs } from "react-icons/fa";
+import {
+  FaExternalLinkAlt,
+  FaGithub,
+  FaReact,
+  FaNodeJs,
+  FaStripe,
+} from "react-icons/fa";
 import {
   SiTailwindcss,
   SiFirebase,
   SiMongodb,
   SiExpress,
-  SiReactrouter,
-  SiJsonwebtokens
+  SiJsonwebtokens,
+  SiReactquery,
+  SiFormik,
+  SiMongoose,
+  SiCloudinary,
 } from "react-icons/si";
 import { useState } from "react";
-import { TbBrandFramerMotion } from "react-icons/tb";
 
 // Project data with icons
 const projects = [
+  {
+    title: "pawdopt",
+    image: "/assets/pawdopt.png",
+    description: `Pawdopt connects rescue pets with loving homes, letting users browse, adopt, and support through donation campaigns.`,
+    live: "https://pawdopt1.netlify.app",
+    tech: [
+      { name: "React", icon: <FaReact className="text-cyan-400" /> },
+      { name: "React Query", icon: <SiReactquery className="text-rose-500" /> },
+      { name: "Formik", icon: <SiFormik className="text-indigo-500" /> },
+      { name: "Mongoose", icon: <SiMongoose className="text-red-600" /> },
+      { name: "Cloudinary", icon: <SiCloudinary className="text-blue-400" /> },
+      { name: "Stripe", icon: <FaStripe className="text-indigo-400" /> },
+    ],
+    source: [
+      {
+        name: "client",
+        href: "https://github.com/hasibul-hossain1/Pawdopt-Client",
+      },
+      {
+        name: "server",
+        href: "https://github.com/hasibul-hossain1/Pawdopt-server",
+      }
+    ],
+  },
   {
     title: "Hobby Hub",
     image: "/assets/hobbyhub.png",
@@ -28,7 +60,7 @@ const projects = [
       { name: "Firebase", icon: <SiFirebase className="text-yellow-400" /> },
       { name: "MongoDB", icon: <SiMongodb className="text-green-500" /> },
       { name: "Express", icon: <SiExpress className="text-gray-300" /> },
-      {name:"Nodejs",icon:<FaNodeJs className="text-green-400"/>}
+      { name: "Nodejs", icon: <FaNodeJs className="text-green-400" /> },
     ],
     source: [
       {
@@ -56,7 +88,12 @@ const projects = [
       },
       { name: "MongoDB", icon: <SiMongodb className="text-green-500" /> },
       { name: "Express", icon: <SiExpress className="text-gray-300" /> },
-      {name:"JWT", icon:<SiJsonwebtokens  className="text-indigo-400 bg-indigo-500/10 border border-indigo-500/20"/>}
+      {
+        name: "JWT",
+        icon: (
+          <SiJsonwebtokens className="text-indigo-400 bg-indigo-500/10 border border-indigo-500/20" />
+        ),
+      },
     ],
     source: [
       {
@@ -66,34 +103,6 @@ const projects = [
       {
         name: "server",
         href: "https://github.com/hasibul-hossain1/BiteFlow-server",
-      },
-    ],
-  },
-  {
-    title: "Get Halal Jobs",
-    image: "/assets/gethalaljobs.png",
-    description:
-      "A job listing and recruitment platform built with modern web technologies, focusing on ethical and halal employment opportunities.",
-    live: "https://gethalaljobs.netlify.app",
-    tech: [
-      { name: "React", icon: <FaReact className="text-cyan-400" /> },
-      { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
-      { name: "Firebase", icon: <SiFirebase className="text-yellow-400" /> },
-      {
-        name: "Motion",
-        icon: (
-          <TbBrandFramerMotion className="bg-yellow-300 text-black rounded-xs" />
-        ),
-      },
-      {
-        name: "React Router",
-        icon: <SiReactrouter className="text-pink-400" />,
-      },
-    ],
-    source: [
-      {
-        name: "client",
-        href: "https://github.com/hasibul-hossain1/Halal-Jobs",
       },
     ],
   },
