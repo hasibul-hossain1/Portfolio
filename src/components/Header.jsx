@@ -1,12 +1,74 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDownload, FaBars, FaTimes } from "react-icons/fa";
+import { FaDownload, FaRegCircle } from "react-icons/fa";
+import { FaRegCircleXmark } from "react-icons/fa6";
+
+const menuItems = [
+  { name: "Home", href: "#home", x: -120, y: -200 },
+  { name: "About", href: "#about", x: -120, y: -150 },
+  { name: "Skills", href: "#skills", x: -120, y: -100 },
+  { name: "Projects", href: "#projects", x: -120, y: -50 },
+  { name: "Contact", href: "#contact", x: -120, y: 0 },
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState("Home");
+
+  const linkRefs = useRef({});
+  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  // Scroll listener to update active menu item
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+
+      for (let item of menuItems) {
+        const section = document.querySelector(item.href);
+        if (section) {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (scrollPos >= top && scrollPos < bottom) {
+            setActive(item.name);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Update underline position on active change or resize
+  useEffect(() => {
+    const updateUnderline = () => {
+      const currentRef = linkRefs.current[active];
+      if (currentRef) {
+        setUnderlineStyle({
+          left: currentRef.offsetLeft,
+          width: currentRef.offsetWidth,
+        });
+      } else {
+        // If no ref, hide underline
+        setUnderlineStyle({ left: 0, width: 0 });
+      }
+    };
+
+    updateUnderline();
+    window.addEventListener("resize", updateUnderline);
+    return () => window.removeEventListener("resize", updateUnderline);
+  }, [active]);
+
+  const handleClick = (name) => {
+    setActive(name);
+    closeMenu();
+  };
 
   return (
     <motion.header
@@ -20,12 +82,29 @@ const Header = () => {
         <div className="text-xl font-bold text-indigo-400">Hasibul Hossain</div>
 
         {/* Center: Nav Links (Desktop only) */}
-        <nav className="space-x-6 text-sm font-medium hidden md:flex">
-          <a href="#home" className="hover:text-indigo-400 transition">Home</a>
-          <a href="#about" className="hover:text-indigo-400 transition">About</a>
-          <a href="#skills" className="hover:text-indigo-400 transition">Skills</a>
-          <a href="#projects" className="hover:text-indigo-400 transition">Projects</a>
-          <a href="#contact" className="hover:text-indigo-400 transition">Contact</a>
+        <nav className="hidden md:flex relative space-x-6 text-sm font-medium">
+          {menuItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={() => handleClick(item.name)}
+              ref={(el) => (linkRefs.current[item.name] = el)}
+              className="relative z-10 px-1 py-2 cursor-pointer hover:text-indigo-400 transition"
+            >
+              {item.name}
+            </a>
+          ))}
+
+          {/* Animated underline */}
+          <motion.div
+            layout
+            className="absolute bottom-0 h-0.5 bg-indigo-400 rounded"
+            style={{
+              left: underlineStyle.left,
+              width: underlineStyle.width,
+            }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          />
         </nav>
 
         {/* Right: Resume Button (Hidden on small screens) */}
@@ -40,39 +119,53 @@ const Header = () => {
         </div>
 
         {/* Hamburger menu (Mobile only) */}
-        <button
-          onClick={toggleMenu}
-          className="text-white text-2xl md:hidden"
-        >
-          <FaBars />
-        </button>
+        <motion.div className="md:hidden">
+          <motion.button
+            onClick={toggleMenu}
+            className="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50"
+            whileTap={{ scale: 0.9 }}
+            animate={{ rotate: isOpen ? 90 : 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <FaRegCircleXmark className="text-red-500" size={25} />
+            ) : (
+              <FaRegCircle size={25} />
+            )}
+          </motion.button>
+        </motion.div>
       </div>
 
-      {/* Mobile Menu Slide-in */}
+      {/* Mobile Menu Staggered */}
       <AnimatePresence>
         {isOpen && (
-          <motion.aside
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 right-0 h-full w-64 bg-black shadow-lg p-6 z-50 md:hidden"
-          >
-            {/* Close button inside sidebar */}
-            <div className="flex justify-end mb-6">
-              <button onClick={closeMenu} className="text-white text-2xl mr-auto">
-                <FaTimes />
-              </button>
-            </div>
-
-            <nav className="flex flex-col space-y-4 text-lg font-medium">
-              <a onClick={closeMenu} href="#home" className="hover:text-indigo-400">Home</a>
-              <a onClick={closeMenu} href="#about" className="hover:text-indigo-400">About</a>
-              <a onClick={closeMenu} href="#skills" className="hover:text-indigo-400">Skills</a>
-              <a onClick={closeMenu} href="#projects" className="hover:text-indigo-400">Projects</a>
-              <a onClick={closeMenu} href="#contact" className="hover:text-indigo-400">Contact</a>
-            </nav>
-          </motion.aside>
+          <div className="fixed bottom-6 right-6 w-12 h-12 md:hidden">
+            {menuItems.map((item, index) => {
+              const { x, y } = item;
+              return (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => handleClick(item.name)}
+                  className={`absolute top-0 left-0 w-28 h-10 rounded-md flex items-center justify-center text-white text-xs transition-colors duration-300 ${
+                    active === item.name ? "bg-indigo-800" : "bg-indigo-600"
+                  }`}
+                  initial={{ scale: 0, x: 0, y: 0 }}
+                  animate={{ scale: 1, x, y }}
+                  exit={{ scale: 0, x: 0, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    delay: index * 0.1,
+                  }}
+                >
+                  {item.name}
+                </motion.a>
+              );
+            })}
+          </div>
         )}
       </AnimatePresence>
     </motion.header>
